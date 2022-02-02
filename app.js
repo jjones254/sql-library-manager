@@ -39,6 +39,7 @@ app.use('/users', usersRouter);
 app.use( (req, res, next) => {
   const err = new Error("Sorry! We couldn't find the page you were looking for.");
   err.status = 404;
+  res.render('page-not-found', { err });
   next(err);
 });
 
@@ -50,7 +51,9 @@ app.use( (err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.message = "Sorry! There was an unexpected error on the server.";
+  console.log(`${res.status}\n${res.message}`)
+  res.render('error', { res });
 });
 
 module.exports = app;
