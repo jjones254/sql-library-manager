@@ -6,7 +6,7 @@ const logger = require('morgan');
 const db = require('./models');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const booksRouter = require('./routes/books');
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/books', booksRouter);
 
 // test connection and sync the database
 (async () => {
@@ -39,7 +39,7 @@ app.use('/users', usersRouter);
 app.use( (req, res, next) => {
   const err = new Error("Sorry! We couldn't find the page you were looking for.");
   err.status = 404;
-  res.render('page-not-found', { err });
+  res.render('page-not-found', { err, title: "Page Not Found" });
   next(err);
 });
 
@@ -53,7 +53,7 @@ app.use( (err, req, res, next) => {
   res.status(err.status || 500);
   res.message = "Sorry! There was an unexpected error on the server.";
   console.log(`${res.status}\n${res.message}`)
-  res.render('error', { res });
+  res.render('error', { res, title: "Server Error" });
 });
 
 module.exports = app;
