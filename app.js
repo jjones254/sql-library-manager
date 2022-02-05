@@ -37,10 +37,11 @@ app.use('/books', booksRouter);
 
 // catch 404 and forward to error handler
 app.use( (req, res, next) => {
-  const err = new Error("Sorry! We couldn't find the page you were looking for.");
+  const err = new Error();
   err.status = 404;
+  err.message = "Sorry! We couldn't find the page you were looking for."
   res.render('page-not-found', { err, title: "Page Not Found" });
-  next(err);
+  next();
 });
 
 // error handler
@@ -52,7 +53,7 @@ app.use( (err, req, res, next) => {
   // render the error page
   res.status(err.status || 500);
   res.message = "Sorry! There was an unexpected error on the server.";
-  console.log(`${res.status}\n${res.message}`)
+  console.log(`${err.status}\n${err.message}`)
   res.render('error', { res, title: "Server Error" });
 });
 
