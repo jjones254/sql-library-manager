@@ -47,6 +47,7 @@ router.get('/:id', asyncHandler(async(req, res) => {
     res.render('update-book', { book, title: "Update Book" });
   } else {
     res.status(404);
+    next();
   }
 }));
 
@@ -60,6 +61,7 @@ router.post('/:id', asyncHandler(async (req, res) => {
       res.redirect('/'); 
     } else {
       res.status(404);
+      next();
     }
   } catch (error) {
     if(error.name === 'SequelizeValidationError') {

@@ -7,24 +7,24 @@ block content
         ul.error
             each error in errors
                 li.error= error.message
-    form(action='/books/' + book.id, method='post')
+    form(action="/books/" + book.id, method="post")
         p
-            label(for='title') Title
-            input(type='text', name='title', id='title', value=book.title)
+            label(for="title") Title
+            input(type="text", name="title", id="title", value=book.title)
         p
-            label(for='author') Author
-            input(type='text', name='author', id='author' value=book.author)
+            label(for="author") Author
+            input(type="text", name="author", id="author" value=book.author)
         p
-            label(for='genre') Genre
-            input(type='text', name='genre', id='genre', value=book.genre)
+            label(for="genre") Genre
+            input(type="text", name="genre", id="genre", value=book.genre)
         p
-            label(for='year') Year
-            input(type='text', name='year', id='year', value=book.year)
+            label(for="year") Year
+            input(type="text", name="year", id="year", value=book.year)
         p
-            input(type='submit', value='Update Book')
+            input(type="submit", value="Update Book")
     
-    form(action='/books/' + book.id + '/delete', method='post', onsubmit='return confirm("Are you sure you want to delete this book?");')
+    form(action="/books/" + book.id + "/delete", method="post", onsubmit='return confirm("Are you sure you want to delete this book?");')
         p
-            a.button(href='/books') Cancel
+            a.button(href="/books") Cancel
         p
-            input(type='submit', value='Delete Book')
+            input(type="submit", value="Delete Book")
